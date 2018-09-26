@@ -1,0 +1,16 @@
+apiVersion: v1
+groupNames: null
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  name: system:openshift:controller:build-config-change-controller
+roleRef:
+  name: system:openshift:controller:build-config-change-controller
+subjects:
+- kind: ServiceAccount
+  name: build-config-change-controller
+  namespace: openshift-infra
+userNames:
+- system:serviceaccount:openshift-infra:build-config-change-controller

@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ClusterRole
+metadata:
+  annotations:
+    authorization.openshift.io/system-only: "true"
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  name: sudoer
+rules:
+- apiGroups:
+  - ""
+  - user.openshift.io
+  attributeRestrictions: null
+  resourceNames:
+  - system:admin
+  resources:
+  - systemusers
+  - users
+  verbs:
+  - impersonate
+- apiGroups:
+  - ""
+  - user.openshift.io
+  attributeRestrictions: null
+  resourceNames:
+  - system:masters
+  resources:
+  - groups
+  - systemgroups
+  verbs:
+  - impersonate

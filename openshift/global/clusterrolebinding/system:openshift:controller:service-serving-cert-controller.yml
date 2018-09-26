@@ -1,0 +1,16 @@
+apiVersion: v1
+groupNames: null
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  name: system:openshift:controller:service-serving-cert-controller
+roleRef:
+  name: system:openshift:controller:service-serving-cert-controller
+subjects:
+- kind: ServiceAccount
+  name: service-serving-cert-controller
+  namespace: openshift-infra
+userNames:
+- system:serviceaccount:openshift-infra:service-serving-cert-controller

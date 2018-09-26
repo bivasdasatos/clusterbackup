@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    openshift.io/sa.scc.mcs: s0:c3,c2
+    openshift.io/sa.scc.supplemental-groups: 1000010000/10000
+    openshift.io/sa.scc.uid-range: 1000010000/10000
+  creationTimestamp: null
+  name: kube-public
+spec:
+  finalizers:
+  - kubernetes
+status:
+  phase: Active

@@ -1,0 +1,14 @@
+apiVersion: v1
+groupNames: null
+kind: ClusterRoleBinding
+metadata:
+  creationTimestamp: null
+  name: router-metrics
+roleRef:
+  name: router-metrics
+subjects:
+- kind: ServiceAccount
+  name: prometheus
+  namespace: openshift-metrics
+userNames:
+- system:serviceaccount:openshift-metrics:prometheus

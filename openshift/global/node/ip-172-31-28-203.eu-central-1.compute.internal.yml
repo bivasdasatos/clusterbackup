@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Node
+metadata:
+  annotations:
+    volumes.kubernetes.io/controller-managed-attach-detach: "true"
+  creationTimestamp: null
+  labels:
+    beta.kubernetes.io/arch: amd64
+    beta.kubernetes.io/os: linux
+    kubernetes.io/hostname: ip-172-31-28-203.eu-central-1.compute.internal
+    logging-infra-fluentd: "true"
+    node-role.kubernetes.io/master: "true"
+    role: master
+  name: ip-172-31-28-203.eu-central-1.compute.internal
+spec:
+  externalID: ip-172-31-28-203.eu-central-1.compute.internal
+status:
+  daemonEndpoints:
+    kubeletEndpoint:
+      Port: 0
+  nodeInfo:
+    architecture: ""
+    bootID: ""
+    containerRuntimeVersion: ""
+    kernelVersion: ""
+    kubeProxyVersion: ""
+    kubeletVersion: ""
+    machineID: ""
+    operatingSystem: ""
+    osImage: ""
+    systemUUID: ""

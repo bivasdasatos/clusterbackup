@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ClusterRole
+metadata:
+  annotations:
+    openshift.io/description: Grants the right to push and pull images from within
+      a project.
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  name: system:image-pusher
+rules:
+- apiGroups:
+  - ""
+  - image.openshift.io
+  attributeRestrictions: null
+  resources:
+  - imagestreams/layers
+  verbs:
+  - get
+  - update

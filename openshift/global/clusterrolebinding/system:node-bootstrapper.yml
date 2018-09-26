@@ -1,0 +1,16 @@
+apiVersion: v1
+groupNames: null
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  name: system:node-bootstrapper
+roleRef:
+  name: system:node-bootstrapper
+subjects:
+- kind: ServiceAccount
+  name: node-bootstrapper
+  namespace: openshift-infra
+userNames:
+- system:serviceaccount:openshift-infra:node-bootstrapper

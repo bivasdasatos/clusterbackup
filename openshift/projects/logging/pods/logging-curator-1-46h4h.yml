@@ -1,0 +1,112 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    openshift.io/deployment-config.latest-version: "1"
+    openshift.io/deployment-config.name: logging-curator
+    openshift.io/deployment.name: logging-curator-1
+    openshift.io/scc: restricted
+  creationTimestamp: null
+  generateName: logging-curator-1-
+  labels:
+    component: curator
+    deployment: logging-curator-1
+    deploymentconfig: logging-curator
+    logging-infra: curator
+    provider: openshift
+  ownerReferences:
+  - apiVersion: v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicationController
+    name: logging-curator-1
+    uid: 4ad0d0bc-bd99-11e8-89cd-0253a4143ad0
+spec:
+  containers:
+  - env:
+    - name: K8S_HOST_URL
+      value: https://kubernetes.default.svc.cluster.local
+    - name: ES_HOST
+      value: logging-es
+    - name: ES_PORT
+      value: "9200"
+    - name: ES_CLIENT_CERT
+      value: /etc/curator/keys/cert
+    - name: ES_CLIENT_KEY
+      value: /etc/curator/keys/key
+    - name: ES_CA
+      value: /etc/curator/keys/ca
+    - name: CURATOR_DEFAULT_DAYS
+      value: "30"
+    - name: CURATOR_RUN_HOUR
+      value: "3"
+    - name: CURATOR_RUN_MINUTE
+      value: "30"
+    - name: CURATOR_RUN_TIMEZONE
+      value: UTC
+    - name: CURATOR_SCRIPT_LOG_LEVEL
+      value: INFO
+    - name: CURATOR_LOG_LEVEL
+      value: ERROR
+    image: registry.access.redhat.com/openshift3/logging-curator:v3.9.27
+    imagePullPolicy: IfNotPresent
+    name: curator
+    resources:
+      limits:
+        memory: 256Mi
+      requests:
+        cpu: 100m
+        memory: 256Mi
+    securityContext:
+      capabilities:
+        drop:
+        - KILL
+        - MKNOD
+        - SETGID
+        - SETUID
+      runAsUser: 1000070000
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /etc/curator/keys
+      name: certs
+      readOnly: true
+    - mountPath: /etc/curator/settings
+      name: config
+      readOnly: true
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: aggregated-logging-curator-token-c8cdg
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  imagePullSecrets:
+  - name: aggregated-logging-curator-dockercfg-nd44x
+  nodeName: ip-172-31-25-38.eu-central-1.compute.internal
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext:
+    fsGroup: 1000070000
+    seLinuxOptions:
+      level: s0:c8,c7
+  serviceAccount: aggregated-logging-curator
+  serviceAccountName: aggregated-logging-curator
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoSchedule
+    key: node.kubernetes.io/memory-pressure
+    operator: Exists
+  volumes:
+  - name: certs
+    secret:
+      defaultMode: 420
+      secretName: logging-curator
+  - configMap:
+      defaultMode: 420
+      name: logging-curator
+    name: config
+  - name: aggregated-logging-curator-token-c8cdg
+    secret:
+      defaultMode: 420
+      secretName: aggregated-logging-curator-token-c8cdg
+status:
+  phase: Pending
+  qosClass: Burstable

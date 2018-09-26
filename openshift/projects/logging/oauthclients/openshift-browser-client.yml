@@ -1,0 +1,9 @@
+apiVersion: v1
+grantMethod: auto
+kind: OAuthClient
+metadata:
+  creationTimestamp: null
+  name: openshift-browser-client
+redirectURIs:
+- https://backupmaster008.amosdemo.io:8443/oauth/token/display
+secret: a1d7eae8-5e81-4b00-acd4-c006a34645e3

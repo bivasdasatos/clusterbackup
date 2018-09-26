@@ -1,0 +1,65 @@
+apiVersion: v1
+kind: ClusterRole
+metadata:
+  annotations:
+    authorization.openshift.io/system-only: "true"
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  name: system:openshift:controller:pv-recycler-controller
+rules:
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - persistentvolumes
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - update
+  - watch
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - persistentvolumes/status
+  verbs:
+  - update
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - persistentvolumeclaims
+  verbs:
+  - get
+  - list
+  - update
+  - watch
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - persistentvolumeclaims/status
+  verbs:
+  - update
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - pods
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - events
+  verbs:
+  - create
+  - patch
+  - update

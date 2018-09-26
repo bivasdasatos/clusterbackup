@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: ClusterRole
+metadata:
+  annotations:
+    authorization.openshift.io/system-only: "true"
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  name: system:openshift:controller:service-serving-cert-controller
+rules:
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - services
+  verbs:
+  - list
+  - update
+  - watch
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - secrets
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - update
+  - watch
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - events
+  verbs:
+  - create
+  - patch
+  - update

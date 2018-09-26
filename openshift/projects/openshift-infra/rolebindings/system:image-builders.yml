@@ -1,0 +1,14 @@
+apiVersion: v1
+groupNames: null
+kind: RoleBinding
+metadata:
+  creationTimestamp: null
+  name: system:image-builders
+roleRef:
+  name: system:image-builder
+subjects:
+- kind: ServiceAccount
+  name: builder
+  namespace: openshift-infra
+userNames:
+- system:serviceaccount:openshift-infra:builder

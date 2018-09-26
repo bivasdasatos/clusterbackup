@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: ClusterRole
+metadata:
+  annotations:
+    authorization.openshift.io/system-only: "true"
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  name: system:node-admin
+rules:
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - nodes
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - nodes
+  verbs:
+  - proxy
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - nodes/log
+  - nodes/metrics
+  - nodes/proxy
+  - nodes/spec
+  - nodes/stats
+  verbs:
+  - '*'

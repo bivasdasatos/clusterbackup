@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: NetNamespace
+metadata:
+  creationTimestamp: null
+  name: openshift-web-console
+netid: 7557578
+netname: openshift-web-console

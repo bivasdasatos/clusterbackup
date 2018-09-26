@@ -1,0 +1,18 @@
+apiVersion: v1
+groupNames: null
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  labels:
+    kubernetes.io/bootstrapping: rbac-defaults
+  name: system:controller:replication-controller
+roleRef:
+  name: system:controller:replication-controller
+subjects:
+- kind: ServiceAccount
+  name: replication-controller
+  namespace: kube-system
+userNames:
+- system:serviceaccount:kube-system:replication-controller

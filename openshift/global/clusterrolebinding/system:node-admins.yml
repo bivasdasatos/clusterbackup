@@ -1,0 +1,18 @@
+apiVersion: v1
+groupNames:
+- system:node-admins
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  name: system:node-admins
+roleRef:
+  name: system:node-admin
+subjects:
+- kind: SystemUser
+  name: system:master
+- kind: SystemGroup
+  name: system:node-admins
+userNames:
+- system:master

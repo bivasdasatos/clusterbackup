@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: ClusterRole
+metadata:
+  annotations:
+    authorization.openshift.io/system-only: "true"
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  labels:
+    kubernetes.io/bootstrapping: rbac-defaults
+  name: system:controller:deployment-controller
+rules:
+- apiGroups:
+  - apps
+  - extensions
+  attributeRestrictions: null
+  resources:
+  - deployments
+  verbs:
+  - get
+  - list
+  - update
+  - watch
+- apiGroups:
+  - apps
+  - extensions
+  attributeRestrictions: null
+  resources:
+  - deployments/status
+  verbs:
+  - update
+- apiGroups:
+  - apps
+  - extensions
+  attributeRestrictions: null
+  resources:
+  - deployments/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - apps
+  - extensions
+  attributeRestrictions: null
+  resources:
+  - replicasets
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - pods
+  verbs:
+  - get
+  - list
+  - update
+  - watch
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - events
+  verbs:
+  - create
+  - patch
+  - update

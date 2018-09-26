@@ -1,0 +1,133 @@
+apiVersion: v1
+kind: ClusterRole
+metadata:
+  annotations:
+    authorization.openshift.io/system-only: "true"
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  name: registry-admin
+rules:
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - secrets
+  - serviceaccounts
+  verbs:
+  - create
+  - delete
+  - deletecollection
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - ""
+  - image.openshift.io
+  attributeRestrictions: null
+  resources:
+  - imagestreamimages
+  - imagestreammappings
+  - imagestreams
+  - imagestreams/secrets
+  - imagestreamtags
+  verbs:
+  - create
+  - delete
+  - deletecollection
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - ""
+  - image.openshift.io
+  attributeRestrictions: null
+  resources:
+  - imagestreamimports
+  verbs:
+  - create
+- apiGroups:
+  - ""
+  - image.openshift.io
+  attributeRestrictions: null
+  resources:
+  - imagestreams/layers
+  verbs:
+  - get
+  - update
+- apiGroups:
+  - ""
+  - authorization.openshift.io
+  attributeRestrictions: null
+  resources:
+  - rolebindings
+  - roles
+  verbs:
+  - create
+  - delete
+  - deletecollection
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - rbac.authorization.k8s.io
+  attributeRestrictions: null
+  resources:
+  - rolebindings
+  - roles
+  verbs:
+  - create
+  - delete
+  - deletecollection
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - ""
+  - authorization.openshift.io
+  attributeRestrictions: null
+  resources:
+  - localresourceaccessreviews
+  - localsubjectaccessreviews
+  - subjectrulesreviews
+  verbs:
+  - create
+- apiGroups:
+  - authorization.k8s.io
+  attributeRestrictions: null
+  resources:
+  - localsubjectaccessreviews
+  verbs:
+  - create
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - namespaces
+  verbs:
+  - get
+- apiGroups:
+  - ""
+  - project.openshift.io
+  attributeRestrictions: null
+  resources:
+  - projects
+  verbs:
+  - delete
+  - get
+- apiGroups:
+  - ""
+  - authorization.openshift.io
+  attributeRestrictions: null
+  resources:
+  - resourceaccessreviews
+  - subjectaccessreviews
+  verbs:
+  - create

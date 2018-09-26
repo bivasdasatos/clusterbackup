@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    openshift.io/logging.data.prefix: .operations
+    openshift.io/sa.scc.mcs: s0:c5,c0
+    openshift.io/sa.scc.supplemental-groups: 1000020000/10000
+    openshift.io/sa.scc.uid-range: 1000020000/10000
+  creationTimestamp: null
+  name: kube-system
+spec:
+  finalizers:
+  - kubernetes
+status:
+  phase: Active

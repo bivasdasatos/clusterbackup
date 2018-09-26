@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ClusterRole
+metadata:
+  creationTimestamp: null
+  name: management-infra-admin
+rules:
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - pods/log
+  verbs:
+  - get
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - pods/proxy
+  verbs:
+  - '*'

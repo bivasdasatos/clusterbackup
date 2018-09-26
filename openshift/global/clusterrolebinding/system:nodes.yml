@@ -1,0 +1,12 @@
+apiVersion: v1
+groupNames: null
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  name: system:nodes
+roleRef:
+  name: system:node
+subjects: []
+userNames: null

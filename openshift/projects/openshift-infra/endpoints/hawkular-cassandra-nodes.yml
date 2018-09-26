@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Endpoints
+metadata:
+  creationTimestamp: null
+  labels:
+    metrics-infra: hawkular-cassandra
+    name: hawkular-cassandra
+  name: hawkular-cassandra-nodes
+subsets:
+- addresses:
+  - ip: 10.128.0.24
+    nodeName: ip-172-31-25-38.eu-central-1.compute.internal
+    targetRef:
+      kind: Pod
+      name: hawkular-cassandra-1-ddhqm
+      namespace: openshift-infra
+      resourceVersion: "58622"
+      uid: 8bf702dc-bda5-11e8-89cd-0253a4143ad0
+  ports:
+  - name: ssl-port
+    port: 7001
+    protocol: TCP
+  - name: cql-port
+    port: 9042
+    protocol: TCP
+  - name: tcp-port
+    port: 7000
+    protocol: TCP

@@ -1,0 +1,106 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    description: Defines how to deploy the application server
+    template.alpha.openshift.io/wait-for-ready: "true"
+  creationTimestamp: null
+  generation: 1
+  labels:
+    app: dancer-mysql-example
+    template: dancer-mysql-example
+  name: dancer-mysql-example
+spec:
+  replicas: 1
+  selector:
+    name: dancer-mysql-example
+  strategy:
+    activeDeadlineSeconds: 21600
+    recreateParams:
+      timeoutSeconds: 600
+    resources: {}
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        name: dancer-mysql-example
+      name: dancer-mysql-example
+    spec:
+      containers:
+      - env:
+        - name: DATABASE_SERVICE_NAME
+          value: database
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              key: database-user
+              name: dancer-mysql-example
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: database-password
+              name: dancer-mysql-example
+        - name: MYSQL_DATABASE
+          value: sampledb
+        - name: SECRET_KEY_BASE
+          valueFrom:
+            secretKeyRef:
+              key: keybase
+              name: dancer-mysql-example
+        - name: PERL_APACHE2_RELOAD
+        image: docker-registry.default.svc:5000/demoproject/dancer-mysql-example@sha256:b4d41dff380ca5540930ae6bdd601c2c08257ce1ab33af5939912232d0ed8fa0
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 3
+        name: dancer-mysql-example
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 3
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 3
+        resources:
+          limits:
+            memory: 512Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  test: false
+  triggers:
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - dancer-mysql-example
+      from:
+        kind: ImageStreamTag
+        name: dancer-mysql-example:latest
+        namespace: demoproject
+    type: ImageChange
+  - type: ConfigChange
+status:
+  availableReplicas: 0
+  latestVersion: 0
+  observedGeneration: 0
+  replicas: 0
+  unavailableReplicas: 0
+  updatedReplicas: 0

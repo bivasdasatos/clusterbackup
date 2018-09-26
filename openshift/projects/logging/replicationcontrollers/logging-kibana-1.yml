@@ -1,0 +1,171 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  annotations:
+    openshift.io/deployer-pod.completed-at: 2018-09-21 12:24:46 +0000 UTC
+    openshift.io/deployer-pod.created-at: 2018-09-21 12:24:10 +0000 UTC
+    openshift.io/deployer-pod.name: logging-kibana-1-deploy
+    openshift.io/deployment-config.latest-version: "1"
+    openshift.io/deployment-config.name: logging-kibana
+    openshift.io/deployment.phase: Complete
+    openshift.io/deployment.replicas: "1"
+    openshift.io/deployment.status-reason: config change
+    openshift.io/encoded-deployment-config: |
+      {"kind":"DeploymentConfig","apiVersion":"v1","metadata":{"name":"logging-kibana","namespace":"logging","selfLink":"/apis/apps.openshift.io/v1/namespaces/logging/deploymentconfigs/logging-kibana","uid":"3de2133c-bd99-11e8-89cd-0253a4143ad0","resourceVersion":"3869","generation":1,"creationTimestamp":"2018-09-21T12:24:10Z","labels":{"component":"kibana","logging-infra":"kibana","provider":"openshift"}},"spec":{"strategy":{"type":"Rolling","rollingParams":{"updatePeriodSeconds":1,"intervalSeconds":1,"timeoutSeconds":600,"maxUnavailable":"25%","maxSurge":"25%"},"resources":{},"activeDeadlineSeconds":21600},"triggers":[{"type":"ConfigChange"}],"replicas":1,"test":false,"selector":{"component":"kibana","logging-infra":"kibana","provider":"openshift"},"template":{"metadata":{"name":"logging-kibana","creationTimestamp":null,"labels":{"component":"kibana","logging-infra":"kibana","provider":"openshift"}},"spec":{"volumes":[{"name":"kibana","secret":{"secretName":"logging-kibana","defaultMode":420}},{"name":"kibana-proxy","secret":{"secretName":"logging-kibana-proxy","defaultMode":420}}],"containers":[{"name":"kibana","image":"registry.access.redhat.com/openshift3/logging-kibana:v3.9.27","env":[{"name":"ES_HOST","value":"logging-es"},{"name":"ES_PORT","value":"9200"},{"name":"KIBANA_MEMORY_LIMIT","valueFrom":{"resourceFieldRef":{"containerName":"kibana","resource":"limits.memory","divisor":"0"}}}],"resources":{"limits":{"memory":"736Mi"},"requests":{"cpu":"100m","memory":"736Mi"}},"volumeMounts":[{"name":"kibana","readOnly":true,"mountPath":"/etc/kibana/keys"}],"readinessProbe":{"exec":{"command":["/usr/share/kibana/probe/readiness.sh"]},"initialDelaySeconds":5,"timeoutSeconds":4,"periodSeconds":5,"successThreshold":1,"failureThreshold":3},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","imagePullPolicy":"IfNotPresent"},{"name":"kibana-proxy","image":"registry.access.redhat.com/openshift3/logging-auth-proxy:v3.9.27","ports":[{"name":"oaproxy","containerPort":3000,"protocol":"TCP"}],"env":[{"name":"OAP_BACKEND_URL","value":"http://localhost:5601"},{"name":"OAP_AUTH_MODE","value":"oauth2"},{"name":"OAP_TRANSFORM","value":"user_header,token_header"},{"name":"OAP_OAUTH_ID","value":"kibana-proxy"},{"name":"OAP_MASTER_URL","value":"https://kubernetes.default.svc.cluster.local"},{"name":"OAP_PUBLIC_MASTER_URL","value":"https://backupmaster008.amosdemo.io:8443"},{"name":"OAP_LOGOUT_REDIRECT","value":"https://backupmaster008.amosdemo.io:8443/console/logout"},{"name":"OAP_MASTER_CA_FILE","value":"/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"},{"name":"OAP_DEBUG","value":"False"},{"name":"OAP_OAUTH_SECRET_FILE","value":"/secret/oauth-secret"},{"name":"OAP_SERVER_CERT_FILE","value":"/secret/server-cert"},{"name":"OAP_SERVER_KEY_FILE","value":"/secret/server-key"},{"name":"OAP_SERVER_TLS_FILE","value":"/secret/server-tls.json"},{"name":"OAP_SESSION_SECRET_FILE","value":"/secret/session-secret"},{"name":"OCP_AUTH_PROXY_MEMORY_LIMIT","valueFrom":{"resourceFieldRef":{"containerName":"kibana-proxy","resource":"limits.memory","divisor":"0"}}}],"resources":{"limits":{"memory":"256Mi"},"requests":{"cpu":"100m","memory":"256Mi"}},"volumeMounts":[{"name":"kibana-proxy","readOnly":true,"mountPath":"/secret"}],"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","imagePullPolicy":"IfNotPresent"}],"restartPolicy":"Always","terminationGracePeriodSeconds":30,"dnsPolicy":"ClusterFirst","serviceAccountName":"aggregated-logging-kibana","serviceAccount":"aggregated-logging-kibana","securityContext":{},"affinity":{"podAntiAffinity":{"preferredDuringSchedulingIgnoredDuringExecution":[{"weight":100,"podAffinityTerm":{"labelSelector":{"matchExpressions":[{"key":"logging-infra","operator":"In","values":["kibana"]}]},"topologyKey":"kubernetes.io/hostname"}}]}},"schedulerName":"default-scheduler"}}},"status":{"latestVersion":1,"observedGeneration":0,"replicas":0,"updatedReplicas":0,"availableReplicas":0,"unavailableReplicas":0,"details":{"message":"config change","causes":[{"type":"ConfigChange"}]}}}
+  creationTimestamp: null
+  generation: 1
+  labels:
+    component: kibana
+    logging-infra: kibana
+    openshift.io/deployment-config.name: logging-kibana
+    provider: openshift
+  name: logging-kibana-1
+  ownerReferences:
+  - apiVersion: apps.openshift.io/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: DeploymentConfig
+    name: logging-kibana
+    uid: 3de2133c-bd99-11e8-89cd-0253a4143ad0
+spec:
+  replicas: 1
+  selector:
+    component: kibana
+    deployment: logging-kibana-1
+    deploymentconfig: logging-kibana
+    logging-infra: kibana
+    provider: openshift
+  template:
+    metadata:
+      annotations:
+        openshift.io/deployment-config.latest-version: "1"
+        openshift.io/deployment-config.name: logging-kibana
+        openshift.io/deployment.name: logging-kibana-1
+      creationTimestamp: null
+      labels:
+        component: kibana
+        deployment: logging-kibana-1
+        deploymentconfig: logging-kibana
+        logging-infra: kibana
+        provider: openshift
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: logging-infra
+                  operator: In
+                  values:
+                  - kibana
+              topologyKey: kubernetes.io/hostname
+            weight: 100
+      containers:
+      - env:
+        - name: ES_HOST
+          value: logging-es
+        - name: ES_PORT
+          value: "9200"
+        - name: KIBANA_MEMORY_LIMIT
+          valueFrom:
+            resourceFieldRef:
+              containerName: kibana
+              divisor: "0"
+              resource: limits.memory
+        image: registry.access.redhat.com/openshift3/logging-kibana:v3.9.27
+        imagePullPolicy: IfNotPresent
+        name: kibana
+        readinessProbe:
+          exec:
+            command:
+            - /usr/share/kibana/probe/readiness.sh
+          failureThreshold: 3
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 4
+        resources:
+          limits:
+            memory: 736Mi
+          requests:
+            cpu: 100m
+            memory: 736Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /etc/kibana/keys
+          name: kibana
+          readOnly: true
+      - env:
+        - name: OAP_BACKEND_URL
+          value: http://localhost:5601
+        - name: OAP_AUTH_MODE
+          value: oauth2
+        - name: OAP_TRANSFORM
+          value: user_header,token_header
+        - name: OAP_OAUTH_ID
+          value: kibana-proxy
+        - name: OAP_MASTER_URL
+          value: https://kubernetes.default.svc.cluster.local
+        - name: OAP_PUBLIC_MASTER_URL
+          value: https://backupmaster008.amosdemo.io:8443
+        - name: OAP_LOGOUT_REDIRECT
+          value: https://backupmaster008.amosdemo.io:8443/console/logout
+        - name: OAP_MASTER_CA_FILE
+          value: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        - name: OAP_DEBUG
+          value: "False"
+        - name: OAP_OAUTH_SECRET_FILE
+          value: /secret/oauth-secret
+        - name: OAP_SERVER_CERT_FILE
+          value: /secret/server-cert
+        - name: OAP_SERVER_KEY_FILE
+          value: /secret/server-key
+        - name: OAP_SERVER_TLS_FILE
+          value: /secret/server-tls.json
+        - name: OAP_SESSION_SECRET_FILE
+          value: /secret/session-secret
+        - name: OCP_AUTH_PROXY_MEMORY_LIMIT
+          valueFrom:
+            resourceFieldRef:
+              containerName: kibana-proxy
+              divisor: "0"
+              resource: limits.memory
+        image: registry.access.redhat.com/openshift3/logging-auth-proxy:v3.9.27
+        imagePullPolicy: IfNotPresent
+        name: kibana-proxy
+        ports:
+        - containerPort: 3000
+          name: oaproxy
+          protocol: TCP
+        resources:
+          limits:
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 256Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /secret
+          name: kibana-proxy
+          readOnly: true
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: aggregated-logging-kibana
+      serviceAccountName: aggregated-logging-kibana
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: kibana
+        secret:
+          defaultMode: 420
+          secretName: logging-kibana
+      - name: kibana-proxy
+        secret:
+          defaultMode: 420
+          secretName: logging-kibana-proxy
+status:
+  replicas: 0

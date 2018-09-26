@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ClusterRole
+metadata:
+  annotations:
+    authorization.openshift.io/system-only: "true"
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  name: system:webhook
+rules:
+- apiGroups:
+  - ""
+  - build.openshift.io
+  attributeRestrictions: null
+  resources:
+  - buildconfigs/webhooks
+  verbs:
+  - create
+  - get

@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    description: Exposes and load balances the application pods
+    service.alpha.openshift.io/dependencies: '[{"name": "database", "kind": "Service"}]'
+  creationTimestamp: null
+  labels:
+    app: dancer-mysql-example
+    template: dancer-mysql-example
+  name: dancer-mysql-example
+spec:
+  ports:
+  - name: web
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    name: dancer-mysql-example
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

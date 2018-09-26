@@ -1,0 +1,16 @@
+apiVersion: v1
+groupNames: null
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  name: system:openshift:controller:deploymentconfig-controller
+roleRef:
+  name: system:openshift:controller:deploymentconfig-controller
+subjects:
+- kind: ServiceAccount
+  name: deploymentconfig-controller
+  namespace: openshift-infra
+userNames:
+- system:serviceaccount:openshift-infra:deploymentconfig-controller

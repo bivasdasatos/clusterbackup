@@ -1,0 +1,8 @@
+apiVersion: v1
+grantMethod: auto
+kind: OAuthClient
+metadata:
+  creationTimestamp: null
+  name: openshift-web-console
+redirectURIs:
+- https://backupmaster008.amosdemo.io:8443/console/

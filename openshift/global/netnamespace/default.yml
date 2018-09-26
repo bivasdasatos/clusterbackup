@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: NetNamespace
+metadata:
+  creationTimestamp: null
+  name: default
+netid: 0
+netname: default

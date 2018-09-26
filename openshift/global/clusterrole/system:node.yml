@@ -1,0 +1,134 @@
+apiVersion: v1
+kind: ClusterRole
+metadata:
+  annotations:
+    authorization.openshift.io/system-only: "true"
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  name: system:node
+rules:
+- apiGroups:
+  - authentication.k8s.io
+  attributeRestrictions: null
+  resources:
+  - tokenreviews
+  verbs:
+  - create
+- apiGroups:
+  - authorization.k8s.io
+  attributeRestrictions: null
+  resources:
+  - localsubjectaccessreviews
+  - subjectaccessreviews
+  verbs:
+  - create
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - services
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - nodes
+  verbs:
+  - create
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - nodes
+  verbs:
+  - delete
+  - patch
+  - update
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - nodes/status
+  verbs:
+  - patch
+  - update
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - events
+  verbs:
+  - create
+  - patch
+  - update
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - pods
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - pods
+  verbs:
+  - create
+  - delete
+  - get
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - pods/status
+  verbs:
+  - update
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - pods/eviction
+  verbs:
+  - create
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - configmaps
+  - secrets
+  verbs:
+  - get
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - persistentvolumeclaims
+  - persistentvolumes
+  verbs:
+  - get
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - endpoints
+  verbs:
+  - get
+- apiGroups:
+  - certificates.k8s.io
+  attributeRestrictions: null
+  resources:
+  - certificatesigningrequests
+  verbs:
+  - create
+  - get
+  - list
+  - watch

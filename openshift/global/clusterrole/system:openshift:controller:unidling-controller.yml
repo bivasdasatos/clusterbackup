@@ -1,0 +1,73 @@
+apiVersion: v1
+kind: ClusterRole
+metadata:
+  annotations:
+    authorization.openshift.io/system-only: "true"
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  name: system:openshift:controller:unidling-controller
+rules:
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - endpoints
+  - replicationcontrollers/scale
+  verbs:
+  - get
+  - update
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - replicationcontrollers
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - ""
+  - apps.openshift.io
+  attributeRestrictions: null
+  resources:
+  - deploymentconfigs
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - apps
+  - extensions
+  attributeRestrictions: null
+  resources:
+  - deployments/scale
+  - replicasets/scale
+  verbs:
+  - get
+  - update
+- apiGroups:
+  - ""
+  - apps.openshift.io
+  attributeRestrictions: null
+  resources:
+  - deploymentconfigs/scale
+  verbs:
+  - get
+  - update
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - events
+  verbs:
+  - list
+  - watch
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - events
+  verbs:
+  - create
+  - patch
+  - update

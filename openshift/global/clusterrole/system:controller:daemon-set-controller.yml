@@ -1,0 +1,84 @@
+apiVersion: v1
+kind: ClusterRole
+metadata:
+  annotations:
+    authorization.openshift.io/system-only: "true"
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  labels:
+    kubernetes.io/bootstrapping: rbac-defaults
+  name: system:controller:daemon-set-controller
+rules:
+- apiGroups:
+  - apps
+  - extensions
+  attributeRestrictions: null
+  resources:
+  - daemonsets
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - apps
+  - extensions
+  attributeRestrictions: null
+  resources:
+  - daemonsets/status
+  verbs:
+  - update
+- apiGroups:
+  - apps
+  - extensions
+  attributeRestrictions: null
+  resources:
+  - daemonsets/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - nodes
+  verbs:
+  - list
+  - watch
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - pods
+  verbs:
+  - create
+  - delete
+  - list
+  - patch
+  - watch
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - pods/binding
+  verbs:
+  - create
+- apiGroups:
+  - apps
+  attributeRestrictions: null
+  resources:
+  - controllerrevisions
+  verbs:
+  - create
+  - delete
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - events
+  verbs:
+  - create
+  - patch
+  - update

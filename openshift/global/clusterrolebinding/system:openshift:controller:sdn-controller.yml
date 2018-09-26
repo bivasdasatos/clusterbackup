@@ -1,0 +1,16 @@
+apiVersion: v1
+groupNames: null
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  name: system:openshift:controller:sdn-controller
+roleRef:
+  name: system:openshift:controller:sdn-controller
+subjects:
+- kind: ServiceAccount
+  name: sdn-controller
+  namespace: openshift-infra
+userNames:
+- system:serviceaccount:openshift-infra:sdn-controller

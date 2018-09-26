@@ -1,0 +1,9 @@
+apiVersion: v1
+grantMethod: auto
+kind: OAuthClient
+metadata:
+  creationTimestamp: null
+  name: openshift-challenging-client
+redirectURIs:
+- https://backupmaster008.amosdemo.io:8443/oauth/token/implicit
+respondWithChallenges: true

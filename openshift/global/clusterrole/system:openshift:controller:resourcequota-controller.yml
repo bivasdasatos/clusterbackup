@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: ClusterRole
+metadata:
+  annotations:
+    authorization.openshift.io/system-only: "true"
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  name: system:openshift:controller:resourcequota-controller
+rules:
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - resourcequotas/status
+  verbs:
+  - update
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - resourcequotas
+  verbs:
+  - list
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - services
+  verbs:
+  - list
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - configmaps
+  verbs:
+  - list
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - secrets
+  verbs:
+  - list
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - replicationcontrollers
+  verbs:
+  - list
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - events
+  verbs:
+  - create
+  - patch
+  - update

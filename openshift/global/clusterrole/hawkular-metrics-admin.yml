@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ClusterRole
+metadata:
+  creationTimestamp: null
+  name: hawkular-metrics-admin
+rules:
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - hawkular-alerts
+  - hawkular-metrics
+  verbs:
+  - '*'

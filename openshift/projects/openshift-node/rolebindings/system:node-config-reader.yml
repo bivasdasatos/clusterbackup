@@ -1,0 +1,16 @@
+apiVersion: v1
+groupNames:
+- system:nodes
+kind: RoleBinding
+metadata:
+  annotations:
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  name: system:node-config-reader
+roleRef:
+  name: system:node-config-reader
+  namespace: openshift-node
+subjects:
+- kind: SystemGroup
+  name: system:nodes
+userNames: null

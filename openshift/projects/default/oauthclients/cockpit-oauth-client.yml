@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: OAuthClient
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: null
+  labels:
+    app: registry-console
+    createdBy: registry-console-template
+  name: cockpit-oauth-client
+redirectURIs:
+- https://registry-console-default.apps008.amosdemo.io
+secret: userF4vviT00BUYeK5lpD61oDsd6hpfvc4mGGf3EJqyNDkIowtEcKmefFMP1O1ForSAC

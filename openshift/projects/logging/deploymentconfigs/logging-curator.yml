@@ -1,0 +1,107 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  creationTimestamp: null
+  generation: 1
+  labels:
+    component: curator
+    logging-infra: curator
+    provider: openshift
+  name: logging-curator
+spec:
+  replicas: 1
+  selector:
+    component: curator
+    logging-infra: curator
+    provider: openshift
+  strategy:
+    activeDeadlineSeconds: 21600
+    recreateParams:
+      timeoutSeconds: 600
+    resources: {}
+    rollingParams:
+      intervalSeconds: 1
+      maxSurge: 25%
+      maxUnavailable: 25%
+      timeoutSeconds: 600
+      updatePeriodSeconds: 1
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        component: curator
+        logging-infra: curator
+        provider: openshift
+      name: logging-curator
+    spec:
+      containers:
+      - env:
+        - name: K8S_HOST_URL
+          value: https://kubernetes.default.svc.cluster.local
+        - name: ES_HOST
+          value: logging-es
+        - name: ES_PORT
+          value: "9200"
+        - name: ES_CLIENT_CERT
+          value: /etc/curator/keys/cert
+        - name: ES_CLIENT_KEY
+          value: /etc/curator/keys/key
+        - name: ES_CA
+          value: /etc/curator/keys/ca
+        - name: CURATOR_DEFAULT_DAYS
+          value: "30"
+        - name: CURATOR_RUN_HOUR
+          value: "3"
+        - name: CURATOR_RUN_MINUTE
+          value: "30"
+        - name: CURATOR_RUN_TIMEZONE
+          value: UTC
+        - name: CURATOR_SCRIPT_LOG_LEVEL
+          value: INFO
+        - name: CURATOR_LOG_LEVEL
+          value: ERROR
+        image: registry.access.redhat.com/openshift3/logging-curator:v3.9.27
+        imagePullPolicy: IfNotPresent
+        name: curator
+        resources:
+          limits:
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 256Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /etc/curator/keys
+          name: certs
+          readOnly: true
+        - mountPath: /etc/curator/settings
+          name: config
+          readOnly: true
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: aggregated-logging-curator
+      serviceAccountName: aggregated-logging-curator
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: certs
+        secret:
+          defaultMode: 420
+          secretName: logging-curator
+      - configMap:
+          defaultMode: 420
+          name: logging-curator
+        name: config
+  test: false
+  triggers:
+  - type: ConfigChange
+status:
+  availableReplicas: 0
+  latestVersion: 0
+  observedGeneration: 0
+  replicas: 0
+  unavailableReplicas: 0
+  updatedReplicas: 0

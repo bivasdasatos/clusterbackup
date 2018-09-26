@@ -1,0 +1,14 @@
+apiVersion: v1
+groupNames: null
+kind: RoleBinding
+metadata:
+  creationTimestamp: null
+  name: system:deployer
+roleRef:
+  name: system:deployer
+subjects:
+- kind: ServiceAccount
+  name: deployer
+  namespace: management-infra
+userNames:
+- system:serviceaccount:management-infra:deployer

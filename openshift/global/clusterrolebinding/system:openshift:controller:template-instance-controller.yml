@@ -1,0 +1,16 @@
+apiVersion: v1
+groupNames: null
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  name: system:openshift:controller:template-instance-controller
+roleRef:
+  name: system:openshift:controller:template-instance-controller
+subjects:
+- kind: ServiceAccount
+  name: template-instance-controller
+  namespace: openshift-infra
+userNames:
+- system:serviceaccount:openshift-infra:template-instance-controller

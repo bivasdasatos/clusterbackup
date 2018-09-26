@@ -1,0 +1,12 @@
+apiVersion: v1
+clusterNetworks:
+- CIDR: 10.128.0.0/14
+  hostSubnetLength: 9
+hostsubnetlength: 9
+kind: ClusterNetwork
+metadata:
+  creationTimestamp: null
+  name: default
+network: 10.128.0.0/14
+pluginName: redhat/openshift-ovs-multitenant
+serviceNetwork: 172.30.0.0/16

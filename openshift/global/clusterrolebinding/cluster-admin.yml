@@ -1,0 +1,17 @@
+apiVersion: v1
+groupNames:
+- system:masters
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  labels:
+    kubernetes.io/bootstrapping: rbac-defaults
+  name: cluster-admin
+roleRef:
+  name: cluster-admin
+subjects:
+- kind: SystemGroup
+  name: system:masters
+userNames: null

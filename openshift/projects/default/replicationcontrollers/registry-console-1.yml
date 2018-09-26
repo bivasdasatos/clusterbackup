@@ -1,0 +1,100 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  annotations:
+    openshift.io/deployer-pod.completed-at: 2018-09-21 12:20:26 +0000 UTC
+    openshift.io/deployer-pod.created-at: 2018-09-21 12:19:16 +0000 UTC
+    openshift.io/deployer-pod.name: registry-console-1-deploy
+    openshift.io/deployment-config.latest-version: "1"
+    openshift.io/deployment-config.name: registry-console
+    openshift.io/deployment.phase: Complete
+    openshift.io/deployment.replicas: "1"
+    openshift.io/deployment.status-reason: config change
+    openshift.io/encoded-deployment-config: |
+      {"kind":"DeploymentConfig","apiVersion":"v1","metadata":{"name":"registry-console","namespace":"default","selfLink":"/apis/apps.openshift.io/v1/namespaces/default/deploymentconfigs/registry-console","uid":"8ec78e74-bd98-11e8-89cd-0253a4143ad0","resourceVersion":"3019","generation":1,"creationTimestamp":"2018-09-21T12:19:16Z","labels":{"app":"registry-console","createdBy":"registry-console-template","name":"registry-console"},"annotations":{"openshift.io/generated-by":"OpenShiftNewApp"}},"spec":{"strategy":{"type":"Rolling","rollingParams":{"updatePeriodSeconds":1,"intervalSeconds":1,"timeoutSeconds":600,"maxUnavailable":"25%","maxSurge":"25%"},"resources":{},"activeDeadlineSeconds":21600},"triggers":[{"type":"ConfigChange"}],"replicas":1,"revisionHistoryLimit":10,"test":false,"selector":{"name":"registry-console"},"template":{"metadata":{"creationTimestamp":null,"labels":{"app":"registry-console","name":"registry-console"},"annotations":{"openshift.io/generated-by":"OpenShiftNewApp"}},"spec":{"containers":[{"name":"registry-console","image":"registry.access.redhat.com/openshift3/registry-console:v3.9","ports":[{"containerPort":9090,"protocol":"TCP"}],"env":[{"name":"OPENSHIFT_OAUTH_PROVIDER_URL","value":"https://backupmaster008.amosdemo.io:8443"},{"name":"OPENSHIFT_OAUTH_CLIENT_ID","value":"cockpit-oauth-client"},{"name":"KUBERNETES_INSECURE","value":"false"},{"name":"COCKPIT_KUBE_INSECURE","value":"false"},{"name":"REGISTRY_ONLY","value":"true"},{"name":"REGISTRY_HOST","value":"docker-registry-default.apps008.amosdemo.io"}],"resources":{},"livenessProbe":{"httpGet":{"path":"/ping","port":9090,"scheme":"HTTP"},"initialDelaySeconds":10,"timeoutSeconds":5,"periodSeconds":10,"successThreshold":1,"failureThreshold":3},"readinessProbe":{"httpGet":{"path":"/ping","port":9090,"scheme":"HTTP"},"timeoutSeconds":5,"periodSeconds":10,"successThreshold":1,"failureThreshold":3},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","imagePullPolicy":"IfNotPresent"}],"restartPolicy":"Always","terminationGracePeriodSeconds":30,"dnsPolicy":"ClusterFirst","nodeSelector":{"node-role.kubernetes.io/master":"true"},"securityContext":{},"schedulerName":"default-scheduler"}}},"status":{"latestVersion":1,"observedGeneration":0,"replicas":0,"updatedReplicas":0,"availableReplicas":0,"unavailableReplicas":0,"details":{"message":"config change","causes":[{"type":"ConfigChange"}]}}}
+  creationTimestamp: null
+  generation: 1
+  labels:
+    app: registry-console
+    createdBy: registry-console-template
+    name: registry-console
+    openshift.io/deployment-config.name: registry-console
+  name: registry-console-1
+  ownerReferences:
+  - apiVersion: apps.openshift.io/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: DeploymentConfig
+    name: registry-console
+    uid: 8ec78e74-bd98-11e8-89cd-0253a4143ad0
+spec:
+  replicas: 1
+  selector:
+    deployment: registry-console-1
+    deploymentconfig: registry-console
+    name: registry-console
+  template:
+    metadata:
+      annotations:
+        openshift.io/deployment-config.latest-version: "1"
+        openshift.io/deployment-config.name: registry-console
+        openshift.io/deployment.name: registry-console-1
+        openshift.io/generated-by: OpenShiftNewApp
+      creationTimestamp: null
+      labels:
+        app: registry-console
+        deployment: registry-console-1
+        deploymentconfig: registry-console
+        name: registry-console
+    spec:
+      containers:
+      - env:
+        - name: OPENSHIFT_OAUTH_PROVIDER_URL
+          value: https://backupmaster008.amosdemo.io:8443
+        - name: OPENSHIFT_OAUTH_CLIENT_ID
+          value: cockpit-oauth-client
+        - name: KUBERNETES_INSECURE
+          value: "false"
+        - name: COCKPIT_KUBE_INSECURE
+          value: "false"
+        - name: REGISTRY_ONLY
+          value: "true"
+        - name: REGISTRY_HOST
+          value: docker-registry-default.apps008.amosdemo.io
+        image: registry.access.redhat.com/openshift3/registry-console:v3.9
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /ping
+            port: 9090
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        name: registry-console
+        ports:
+        - containerPort: 9090
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /ping
+            port: 9090
+            scheme: HTTP
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      nodeSelector:
+        node-role.kubernetes.io/master: "true"
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  replicas: 0

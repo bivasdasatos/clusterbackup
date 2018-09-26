@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: ClusterRole
+metadata:
+  annotations:
+    authorization.openshift.io/system-only: "true"
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  name: system:sdn-manager
+rules:
+- apiGroups:
+  - ""
+  - network.openshift.io
+  attributeRestrictions: null
+  resources:
+  - hostsubnets
+  - netnamespaces
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  - network.openshift.io
+  attributeRestrictions: null
+  resources:
+  - clusternetworks
+  verbs:
+  - create
+  - get
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - nodes
+  verbs:
+  - get
+  - list
+  - watch

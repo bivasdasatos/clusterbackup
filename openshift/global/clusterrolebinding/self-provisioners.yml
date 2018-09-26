@@ -1,0 +1,15 @@
+apiVersion: v1
+groupNames:
+- system:authenticated:oauth
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  name: self-provisioners
+roleRef:
+  name: self-provisioner
+subjects:
+- kind: SystemGroup
+  name: system:authenticated:oauth
+userNames: null

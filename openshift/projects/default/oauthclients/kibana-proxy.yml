@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: OAuthClient
+metadata:
+  creationTimestamp: null
+  labels:
+    logging-infra: support
+  name: kibana-proxy
+redirectURIs:
+- https://kibana.apps008.amosdemo.io
+scopeRestrictions:
+- literals:
+  - user:info
+  - user:check-access
+  - user:list-projects
+secret: M7mtqNrRhUYMBDBlhDa1NPR7lrvzh1V6HOo5qxpwzdUWapp57a4eD0Qzxktwyl53

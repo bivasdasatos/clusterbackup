@@ -1,0 +1,16 @@
+apiVersion: v1
+groupNames: null
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  name: system:openshift:controller:cluster-quota-reconciliation-controller
+roleRef:
+  name: system:openshift:controller:cluster-quota-reconciliation-controller
+subjects:
+- kind: ServiceAccount
+  name: cluster-quota-reconciliation-controller
+  namespace: openshift-infra
+userNames:
+- system:serviceaccount:openshift-infra:cluster-quota-reconciliation-controller

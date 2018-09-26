@@ -1,0 +1,46 @@
+allowDisabledDocker: false
+apiVersion: v1
+dnsBindAddress: 127.0.0.1:53
+dnsRecursiveResolvConf: /etc/origin/node/resolv.conf
+dnsDomain: cluster.local
+dnsIP: 172.31.28.203
+dockerConfig:
+  execHandlerName: ""
+iptablesSyncPeriod: "30s"
+imageConfig:
+  format: registry.access.redhat.com/openshift3/ose-${component}:${version}
+  latest: False
+kind: NodeConfig
+kubeletArguments: 
+  image-gc-high-threshold:
+  - '90'
+  image-gc-low-threshold:
+  - '80'
+  node-labels:
+  - role=master
+masterClientConnectionOverrides:
+  acceptContentTypes: application/vnd.kubernetes.protobuf,application/json
+  contentType: application/vnd.kubernetes.protobuf
+  burst: 200
+  qps: 100
+masterKubeConfig: system:node:ip-172-31-28-203.eu-central-1.compute.internal.kubeconfig
+networkPluginName: redhat/openshift-ovs-multitenant
+# networkConfig struct introduced in origin 1.0.6 and OSE 3.0.2 which
+# deprecates networkPluginName above. The two should match.
+networkConfig:
+   mtu: 8951
+   networkPluginName: redhat/openshift-ovs-multitenant
+nodeName: ip-172-31-28-203.eu-central-1.compute.internal
+podManifestConfig:
+servingInfo:
+  bindAddress: 0.0.0.0:10250
+  certFile: server.crt
+  clientCA: ca.crt
+  keyFile: server.key
+volumeDirectory: /var/lib/origin/openshift.local.volumes
+proxyArguments:
+  proxy-mode:
+     - iptables
+volumeConfig:
+  localQuota:
+    perFSGroup: 

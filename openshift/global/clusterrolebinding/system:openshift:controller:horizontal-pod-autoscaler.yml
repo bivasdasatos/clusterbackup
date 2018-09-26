@@ -1,0 +1,16 @@
+apiVersion: v1
+groupNames: null
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  name: system:openshift:controller:horizontal-pod-autoscaler
+roleRef:
+  name: system:openshift:controller:horizontal-pod-autoscaler
+subjects:
+- kind: ServiceAccount
+  name: horizontal-pod-autoscaler
+  namespace: openshift-infra
+userNames:
+- system:serviceaccount:openshift-infra:horizontal-pod-autoscaler

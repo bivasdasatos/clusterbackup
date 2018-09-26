@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    openshift.io/logging.data.prefix: .operations
+    openshift.io/node-selector: ""
+    openshift.io/sa.initialized-roles: "true"
+    openshift.io/sa.scc.mcs: s0:c1,c0
+    openshift.io/sa.scc.supplemental-groups: 1000000000/10000
+    openshift.io/sa.scc.uid-range: 1000000000/10000
+  creationTimestamp: null
+  name: default
+spec:
+  finalizers:
+  - kubernetes
+  - openshift.io/origin
+status:
+  phase: Active

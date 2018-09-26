@@ -1,0 +1,15 @@
+apiVersion: v1
+groupNames:
+- system:nodes
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  name: system:node-proxiers
+roleRef:
+  name: system:node-proxier
+subjects:
+- kind: SystemGroup
+  name: system:nodes
+userNames: null

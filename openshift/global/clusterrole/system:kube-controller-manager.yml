@@ -1,0 +1,70 @@
+apiVersion: v1
+kind: ClusterRole
+metadata:
+  annotations:
+    authorization.openshift.io/system-only: "true"
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  labels:
+    kubernetes.io/bootstrapping: rbac-defaults
+  name: system:kube-controller-manager
+rules:
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - events
+  verbs:
+  - create
+  - patch
+  - update
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - endpoints
+  - secrets
+  - serviceaccounts
+  verbs:
+  - create
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - secrets
+  verbs:
+  - delete
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - endpoints
+  - namespaces
+  - secrets
+  - serviceaccounts
+  verbs:
+  - get
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - endpoints
+  - secrets
+  - serviceaccounts
+  verbs:
+  - update
+- apiGroups:
+  - authentication.k8s.io
+  attributeRestrictions: null
+  resources:
+  - tokenreviews
+  verbs:
+  - create
+- apiGroups:
+  - '*'
+  attributeRestrictions: null
+  resources:
+  - '*'
+  verbs:
+  - list
+  - watch

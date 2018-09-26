@@ -1,0 +1,18 @@
+apiVersion: v1
+groupNames: null
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  labels:
+    kubernetes.io/bootstrapping: rbac-defaults
+  name: system:controller:attachdetach-controller
+roleRef:
+  name: system:controller:attachdetach-controller
+subjects:
+- kind: ServiceAccount
+  name: attachdetach-controller
+  namespace: kube-system
+userNames:
+- system:serviceaccount:kube-system:attachdetach-controller

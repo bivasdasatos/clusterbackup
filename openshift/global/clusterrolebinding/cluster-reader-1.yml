@@ -1,0 +1,14 @@
+apiVersion: v1
+groupNames: null
+kind: ClusterRoleBinding
+metadata:
+  creationTimestamp: null
+  name: cluster-reader-1
+roleRef:
+  name: cluster-reader
+subjects:
+- kind: ServiceAccount
+  name: aggregated-logging-fluentd
+  namespace: logging
+userNames:
+- system:serviceaccount:logging:aggregated-logging-fluentd

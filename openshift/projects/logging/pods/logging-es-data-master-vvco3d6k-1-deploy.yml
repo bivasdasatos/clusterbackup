@@ -1,0 +1,89 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    openshift.io/deployment-config.name: logging-es-data-master-vvco3d6k
+    openshift.io/deployment.name: logging-es-data-master-vvco3d6k-1
+    openshift.io/scc: restricted
+  creationTimestamp: null
+  labels:
+    openshift.io/deployer-pod-for.name: logging-es-data-master-vvco3d6k-1
+  name: logging-es-data-master-vvco3d6k-1-deploy
+  ownerReferences:
+  - apiVersion: v1
+    kind: ReplicationController
+    name: logging-es-data-master-vvco3d6k-1
+    uid: 65760e74-bd99-11e8-89cd-0253a4143ad0
+spec:
+  activeDeadlineSeconds: 21600
+  containers:
+  - env:
+    - name: KUBERNETES_MASTER
+      value: https://ip-172-31-28-203.eu-central-1.compute.internal:8443
+    - name: OPENSHIFT_MASTER
+      value: https://ip-172-31-28-203.eu-central-1.compute.internal:8443
+    - name: BEARER_TOKEN_FILE
+      value: /var/run/secrets/kubernetes.io/serviceaccount/token
+    - name: OPENSHIFT_CA_DATA
+      value: |
+        -----BEGIN CERTIFICATE-----
+        MIIC6jCCAdKgAwIBAgIBATANBgkqhkiG9w0BAQsFADAmMSQwIgYDVQQDDBtvcGVu
+        c2hpZnQtc2lnbmVyQDE1Mzc1MzExMzAwHhcNMTgwOTIxMTE1ODQ5WhcNMjMwOTIw
+        MTE1ODUwWjAmMSQwIgYDVQQDDBtvcGVuc2hpZnQtc2lnbmVyQDE1Mzc1MzExMzAw
+        ggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDNTn2d0Cj+tfelr5BSvsps
+        /WmdwA6ktufsgGpJ5JbtxxWSOuj48BtExSpYihl6W50e1mEqb0ASqQcW+jdStlHX
+        8dJ3fVggO5PP7SgRQ+8jz84r1lMKCvGrYvnru+NZLTm/GMWCkuAu4ms8Q/LStLex
+        gx7AockCI1PsyH9h+zRLBSZuAbtKgy9MoPDbPk3ZH52k8ncQVEBvsmQ6rjFqM2fG
+        DmXctaxUkuwddDK3aEIFLcAdO6BuJoh7dgEJ2POZCugpbjnvf+eQPTFptM3OwAP2
+        O4mBjAYdj/PeHFm7/FrQsYWOo3OywNQNFgTAfsQLKrSqm+PkZ0ulz3FClrNgGz8L
+        AgMBAAGjIzAhMA4GA1UdDwEB/wQEAwICpDAPBgNVHRMBAf8EBTADAQH/MA0GCSqG
+        SIb3DQEBCwUAA4IBAQATJLl7WRxURrG17eavjzEvPfQQ5aS7og1ZdY2DlicVnj49
+        DJNwXcoFNM+892dgqCxc9wVQbouZZRv9AvIYaV98ryfArgzrKWEuKV691ci4Dah/
+        zqdqLuUnWS9Y71E3ugQSoOaMtVwBisV3OG6alo/fuZsruoU7hH83PfC+3vhqsq2A
+        gkg/fsUa+qxulP/xooZ+MNkhyMW5okrj7J5Ye/Akli5CecDxko5oPwihRiW1PusO
+        IW4GboNXVZLuub164R+59PlKcEWy1+ldBnZU+RdowDg0Zb3vfxtR4I3v1ri+U1/g
+        HmkS5NwREmpHgCSVuKDHtIaTIOPF7BULX715L/ph
+        -----END CERTIFICATE-----
+    - name: OPENSHIFT_DEPLOYMENT_NAME
+      value: logging-es-data-master-vvco3d6k-1
+    - name: OPENSHIFT_DEPLOYMENT_NAMESPACE
+      value: logging
+    image: registry.access.redhat.com/openshift3/ose-deployer:v3.9.27
+    imagePullPolicy: IfNotPresent
+    name: deployment
+    resources: {}
+    securityContext:
+      capabilities:
+        drop:
+        - KILL
+        - MKNOD
+        - SETGID
+        - SETUID
+      runAsUser: 1000070000
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: deployer-token-58vmv
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  imagePullSecrets:
+  - name: deployer-dockercfg-hjxgk
+  nodeName: ip-172-31-25-38.eu-central-1.compute.internal
+  restartPolicy: Never
+  schedulerName: default-scheduler
+  securityContext:
+    fsGroup: 1000070000
+    seLinuxOptions:
+      level: s0:c8,c7
+  serviceAccount: deployer
+  serviceAccountName: deployer
+  terminationGracePeriodSeconds: 10
+  volumes:
+  - name: deployer-token-58vmv
+    secret:
+      defaultMode: 420
+      secretName: deployer-token-58vmv
+status:
+  phase: Pending
+  qosClass: BestEffort

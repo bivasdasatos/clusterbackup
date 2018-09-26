@@ -1,0 +1,14 @@
+apiVersion: v1
+groupNames: null
+kind: ClusterRoleBinding
+metadata:
+  creationTimestamp: null
+  name: system:image-puller
+roleRef:
+  name: system:image-puller
+subjects:
+- kind: ServiceAccount
+  name: inspector-admin
+  namespace: management-infra
+userNames:
+- system:serviceaccount:management-infra:inspector-admin

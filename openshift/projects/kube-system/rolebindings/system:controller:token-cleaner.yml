@@ -1,0 +1,19 @@
+apiVersion: v1
+groupNames: null
+kind: RoleBinding
+metadata:
+  annotations:
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  labels:
+    kubernetes.io/bootstrapping: rbac-defaults
+  name: system:controller:token-cleaner
+roleRef:
+  name: system:controller:token-cleaner
+  namespace: kube-system
+subjects:
+- kind: ServiceAccount
+  name: token-cleaner
+  namespace: kube-system
+userNames:
+- system:serviceaccount:kube-system:token-cleaner

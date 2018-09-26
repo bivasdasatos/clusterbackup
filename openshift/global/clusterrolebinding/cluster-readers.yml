@@ -1,0 +1,15 @@
+apiVersion: v1
+groupNames:
+- system:cluster-readers
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  name: cluster-readers
+roleRef:
+  name: cluster-reader
+subjects:
+- kind: SystemGroup
+  name: system:cluster-readers
+userNames: null

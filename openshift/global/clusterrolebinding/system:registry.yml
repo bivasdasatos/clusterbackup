@@ -1,0 +1,14 @@
+apiVersion: v1
+groupNames: null
+kind: ClusterRoleBinding
+metadata:
+  creationTimestamp: null
+  name: system:registry
+roleRef:
+  name: system:registry
+subjects:
+- kind: ServiceAccount
+  name: registry
+  namespace: default
+userNames:
+- system:serviceaccount:default:registry

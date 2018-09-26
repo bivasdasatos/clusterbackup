@@ -1,0 +1,465 @@
+apiVersion: v1
+kind: ClusterRole
+metadata:
+  annotations:
+    authorization.openshift.io/system-only: "true"
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  name: cluster-reader
+rules:
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - bindings
+  - componentstatuses
+  - configmaps
+  - endpoints
+  - events
+  - limitranges
+  - namespaces
+  - namespaces/status
+  - nodes
+  - nodes/status
+  - persistentvolumeclaims
+  - persistentvolumeclaims/status
+  - persistentvolumes
+  - persistentvolumes/status
+  - pods
+  - pods/binding
+  - pods/eviction
+  - pods/log
+  - pods/status
+  - podtemplates
+  - replicationcontrollers
+  - replicationcontrollers/scale
+  - replicationcontrollers/status
+  - resourcequotas
+  - resourcequotas/status
+  - securitycontextconstraints
+  - serviceaccounts
+  - services
+  - services/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - admissionregistration.k8s.io
+  attributeRestrictions: null
+  resources:
+  - mutatingwebhookconfigurations
+  - validatingwebhookconfigurations
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - apps
+  attributeRestrictions: null
+  resources:
+  - controllerrevisions
+  - daemonsets
+  - daemonsets/status
+  - deployments
+  - deployments/scale
+  - deployments/status
+  - replicasets
+  - replicasets/scale
+  - replicasets/status
+  - statefulsets
+  - statefulsets/scale
+  - statefulsets/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - apiextensions.k8s.io
+  attributeRestrictions: null
+  resources:
+  - customresourcedefinitions
+  - customresourcedefinitions/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - apiregistration.k8s.io
+  attributeRestrictions: null
+  resources:
+  - apiservices
+  - apiservices/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - autoscaling
+  attributeRestrictions: null
+  resources:
+  - horizontalpodautoscalers
+  - horizontalpodautoscalers/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - batch
+  attributeRestrictions: null
+  resources:
+  - cronjobs
+  - cronjobs/status
+  - jobs
+  - jobs/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - extensions
+  attributeRestrictions: null
+  resources:
+  - daemonsets
+  - daemonsets/status
+  - deployments
+  - deployments/scale
+  - deployments/status
+  - horizontalpodautoscalers
+  - horizontalpodautoscalers/status
+  - ingresses
+  - ingresses/status
+  - jobs
+  - jobs/status
+  - networkpolicies
+  - podsecuritypolicies
+  - replicasets
+  - replicasets/scale
+  - replicasets/status
+  - replicationcontrollers
+  - replicationcontrollers/scale
+  - storageclasses
+  - thirdpartyresources
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - events.k8s.io
+  attributeRestrictions: null
+  resources:
+  - events
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - networking.k8s.io
+  attributeRestrictions: null
+  resources:
+  - networkpolicies
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - policy
+  attributeRestrictions: null
+  resources:
+  - poddisruptionbudgets
+  - poddisruptionbudgets/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - rbac.authorization.k8s.io
+  attributeRestrictions: null
+  resources:
+  - clusterrolebindings
+  - clusterroles
+  - rolebindings
+  - roles
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - settings.k8s.io
+  attributeRestrictions: null
+  resources:
+  - podpresets
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - storage.k8s.io
+  attributeRestrictions: null
+  resources:
+  - storageclasses
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - certificates.k8s.io
+  attributeRestrictions: null
+  resources:
+  - certificatesigningrequests
+  - certificatesigningrequests/approval
+  - certificatesigningrequests/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  - authorization.openshift.io
+  attributeRestrictions: null
+  resources:
+  - clusterrolebindings
+  - clusterroles
+  - rolebindingrestrictions
+  - rolebindings
+  - roles
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  - build.openshift.io
+  attributeRestrictions: null
+  resources:
+  - buildconfigs
+  - buildconfigs/webhooks
+  - builds
+  - builds/details
+  - builds/log
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  - apps.openshift.io
+  attributeRestrictions: null
+  resources:
+  - deploymentconfigs
+  - deploymentconfigs/log
+  - deploymentconfigs/scale
+  - deploymentconfigs/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  - image.openshift.io
+  attributeRestrictions: null
+  resources:
+  - images
+  - imagesignatures
+  - imagestreamimages
+  - imagestreams
+  - imagestreams/status
+  - imagestreamtags
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  - image.openshift.io
+  attributeRestrictions: null
+  resources:
+  - imagestreams/layers
+  verbs:
+  - get
+- apiGroups:
+  - ""
+  - oauth.openshift.io
+  attributeRestrictions: null
+  resources:
+  - oauthclientauthorizations
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  - project.openshift.io
+  attributeRestrictions: null
+  resources:
+  - projectrequests
+  - projects
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  - quota.openshift.io
+  attributeRestrictions: null
+  resources:
+  - appliedclusterresourcequotas
+  - clusterresourcequotas
+  - clusterresourcequotas/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  - route.openshift.io
+  attributeRestrictions: null
+  resources:
+  - routes
+  - routes/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  - network.openshift.io
+  attributeRestrictions: null
+  resources:
+  - clusternetworks
+  - egressnetworkpolicies
+  - hostsubnets
+  - netnamespaces
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  - security.openshift.io
+  attributeRestrictions: null
+  resources:
+  - securitycontextconstraints
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  - template.openshift.io
+  attributeRestrictions: null
+  resources:
+  - processedtemplates
+  - templateconfigs
+  - templateinstances
+  - templates
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  - template.openshift.io
+  attributeRestrictions: null
+  resources:
+  - brokertemplateinstances
+  - templateinstances/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  - user.openshift.io
+  attributeRestrictions: null
+  resources:
+  - groups
+  - identities
+  - useridentitymappings
+  - users
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  - authorization.openshift.io
+  attributeRestrictions: null
+  resources:
+  - localresourceaccessreviews
+  - localsubjectaccessreviews
+  - resourceaccessreviews
+  - selfsubjectrulesreviews
+  - subjectaccessreviews
+  - subjectrulesreviews
+  verbs:
+  - create
+- apiGroups:
+  - authorization.k8s.io
+  attributeRestrictions: null
+  resources:
+  - localsubjectaccessreviews
+  - selfsubjectaccessreviews
+  - selfsubjectrulesreviews
+  - subjectaccessreviews
+  verbs:
+  - create
+- apiGroups:
+  - authentication.k8s.io
+  attributeRestrictions: null
+  resources:
+  - tokenreviews
+  verbs:
+  - create
+- apiGroups:
+  - ""
+  - security.openshift.io
+  attributeRestrictions: null
+  resources:
+  - podsecuritypolicyreviews
+  - podsecuritypolicyselfsubjectreviews
+  - podsecuritypolicysubjectreviews
+  verbs:
+  - create
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - nodes/metrics
+  - nodes/spec
+  verbs:
+  - get
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - nodes/stats
+  verbs:
+  - create
+  - get
+- apiGroups: null
+  attributeRestrictions: null
+  nonResourceURLs:
+  - '*'
+  resources: []
+  verbs:
+  - get
+- apiGroups:
+  - ""
+  - build.openshift.io
+  attributeRestrictions: null
+  resources:
+  - buildlogs
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - resourcequotausages
+  verbs:
+  - get
+  - list
+  - watch

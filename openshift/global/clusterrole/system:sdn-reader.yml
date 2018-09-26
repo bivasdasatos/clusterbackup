@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: ClusterRole
+metadata:
+  annotations:
+    authorization.openshift.io/system-only: "true"
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  name: system:sdn-reader
+rules:
+- apiGroups:
+  - ""
+  - network.openshift.io
+  attributeRestrictions: null
+  resources:
+  - egressnetworkpolicies
+  - hostsubnets
+  - netnamespaces
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - namespaces
+  - nodes
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - extensions
+  attributeRestrictions: null
+  resources:
+  - networkpolicies
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - networking.k8s.io
+  attributeRestrictions: null
+  resources:
+  - networkpolicies
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  - network.openshift.io
+  attributeRestrictions: null
+  resources:
+  - clusternetworks
+  verbs:
+  - get

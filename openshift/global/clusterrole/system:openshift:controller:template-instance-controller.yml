@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ClusterRole
+metadata:
+  annotations:
+    authorization.openshift.io/system-only: "true"
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  name: system:openshift:controller:template-instance-controller
+rules:
+- apiGroups:
+  - authorization.k8s.io
+  attributeRestrictions: null
+  resources:
+  - subjectaccessreviews
+  verbs:
+  - create
+- apiGroups:
+  - template.openshift.io
+  attributeRestrictions: null
+  resources:
+  - templateinstances/status
+  verbs:
+  - update
+- apiGroups:
+  - template.openshift.io
+  attributeRestrictions: null
+  resources:
+  - templateinstances/finalizers
+  verbs:
+  - update

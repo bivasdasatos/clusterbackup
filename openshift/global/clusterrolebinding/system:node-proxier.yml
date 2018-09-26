@@ -1,0 +1,17 @@
+apiVersion: v1
+groupNames: null
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  labels:
+    kubernetes.io/bootstrapping: rbac-defaults
+  name: system:node-proxier
+roleRef:
+  name: system:node-proxier
+subjects:
+- kind: SystemUser
+  name: system:kube-proxy
+userNames:
+- system:kube-proxy

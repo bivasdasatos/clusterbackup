@@ -1,0 +1,14 @@
+apiVersion: v1
+groupNames: null
+kind: ClusterRoleBinding
+metadata:
+  creationTimestamp: null
+  name: cluster-reader-0
+roleRef:
+  name: cluster-reader
+subjects:
+- kind: ServiceAccount
+  name: router
+  namespace: default
+userNames:
+- system:serviceaccount:default:router

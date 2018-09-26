@@ -1,0 +1,109 @@
+apiVersion: extensions/v1beta1
+kind: ReplicaSet
+metadata:
+  annotations:
+    deployment.kubernetes.io/desired-replicas: "1"
+    deployment.kubernetes.io/max-replicas: "1"
+    deployment.kubernetes.io/revision: "1"
+  creationTimestamp: null
+  generation: 1
+  labels:
+    app: openshift-web-console
+    pod-template-hash: "3073353396"
+    webconsole: "true"
+  name: webconsole-74c77977fb
+  ownerReferences:
+  - apiVersion: extensions/v1beta1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Deployment
+    name: webconsole
+    uid: 93e0d338-bd98-11e8-89cd-0253a4143ad0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: openshift-web-console
+      pod-template-hash: "3073353396"
+      webconsole: "true"
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: openshift-web-console
+        pod-template-hash: "3073353396"
+        webconsole: "true"
+      name: webconsole
+    spec:
+      containers:
+      - command:
+        - /usr/bin/origin-web-console
+        - --audit-log-path=-
+        - -v=0
+        - --config=/var/webconsole-config/webconsole-config.yaml
+        image: registry.access.redhat.com/openshift3/ose-web-console:v3.9.27
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - |-
+              if [[ ! -f /tmp/webconsole-config.hash ]]; then \
+                md5sum /var/webconsole-config/webconsole-config.yaml > /tmp/webconsole-config.hash; \
+              elif [[ $(md5sum /var/webconsole-config/webconsole-config.yaml) != $(cat /tmp/webconsole-config.hash) ]]; then \
+                echo 'webconsole-config.yaml has changed.'; \
+                exit 1; \
+              fi && curl -k -f https://0.0.0.0:8443/console/
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: webconsole
+        ports:
+        - containerPort: 8443
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /healthz
+            port: 8443
+            scheme: HTTPS
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/serving-cert
+          name: serving-cert
+        - mountPath: /var/webconsole-config
+          name: webconsole-config
+      dnsPolicy: ClusterFirst
+      nodeSelector:
+        node-role.kubernetes.io/master: "true"
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: webconsole
+      serviceAccountName: webconsole
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: serving-cert
+        secret:
+          defaultMode: 288
+          secretName: webconsole-serving-cert
+      - configMap:
+          defaultMode: 288
+          name: webconsole-config
+        name: webconsole-config
+status:
+  availableReplicas: 1
+  fullyLabeledReplicas: 1
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1

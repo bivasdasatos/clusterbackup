@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Endpoints
+metadata:
+  creationTimestamp: null
+  labels:
+    name: prometheus
+  name: alertmanager
+subsets: null

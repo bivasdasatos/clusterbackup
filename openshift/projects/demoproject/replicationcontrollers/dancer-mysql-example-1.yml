@@ -1,0 +1,106 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  annotations:
+    openshift.io/deployer-pod.completed-at: 2018-09-26 07:37:06 +0000 UTC
+    openshift.io/deployer-pod.created-at: 2018-09-26 07:36:54 +0000 UTC
+    openshift.io/deployer-pod.name: dancer-mysql-example-1-deploy
+    openshift.io/deployment-config.latest-version: "1"
+    openshift.io/deployment-config.name: dancer-mysql-example
+    openshift.io/deployment.phase: Complete
+    openshift.io/deployment.replicas: "1"
+    openshift.io/deployment.status-reason: config change
+    openshift.io/encoded-deployment-config: |
+      {"kind":"DeploymentConfig","apiVersion":"v1","metadata":{"name":"dancer-mysql-example","namespace":"demoproject","selfLink":"/apis/apps.openshift.io/v1/namespaces/demoproject/deploymentconfigs/dancer-mysql-example","uid":"99dfb01f-c15e-11e8-9d6d-0253a4143ad0","resourceVersion":"342203","generation":2,"creationTimestamp":"2018-09-26T07:34:28Z","labels":{"app":"dancer-mysql-example","template":"dancer-mysql-example"},"annotations":{"description":"Defines how to deploy the application server","template.alpha.openshift.io/wait-for-ready":"true"}},"spec":{"strategy":{"type":"Recreate","recreateParams":{"timeoutSeconds":600},"resources":{},"activeDeadlineSeconds":21600},"triggers":[{"type":"ImageChange","imageChangeParams":{"automatic":true,"containerNames":["dancer-mysql-example"],"from":{"kind":"ImageStreamTag","namespace":"demoproject","name":"dancer-mysql-example:latest"},"lastTriggeredImage":"docker-registry.default.svc:5000/demoproject/dancer-mysql-example@sha256:b4d41dff380ca5540930ae6bdd601c2c08257ce1ab33af5939912232d0ed8fa0"}},{"type":"ConfigChange"}],"replicas":1,"test":false,"selector":{"name":"dancer-mysql-example"},"template":{"metadata":{"name":"dancer-mysql-example","creationTimestamp":null,"labels":{"name":"dancer-mysql-example"}},"spec":{"containers":[{"name":"dancer-mysql-example","image":"docker-registry.default.svc:5000/demoproject/dancer-mysql-example@sha256:b4d41dff380ca5540930ae6bdd601c2c08257ce1ab33af5939912232d0ed8fa0","ports":[{"containerPort":8080,"protocol":"TCP"}],"env":[{"name":"DATABASE_SERVICE_NAME","value":"database"},{"name":"MYSQL_USER","valueFrom":{"secretKeyRef":{"name":"dancer-mysql-example","key":"database-user"}}},{"name":"MYSQL_PASSWORD","valueFrom":{"secretKeyRef":{"name":"dancer-mysql-example","key":"database-password"}}},{"name":"MYSQL_DATABASE","value":"sampledb"},{"name":"SECRET_KEY_BASE","valueFrom":{"secretKeyRef":{"name":"dancer-mysql-example","key":"keybase"}}},{"name":"PERL_APACHE2_RELOAD"}],"resources":{"limits":{"memory":"512Mi"}},"livenessProbe":{"httpGet":{"path":"/health","port":8080,"scheme":"HTTP"},"initialDelaySeconds":30,"timeoutSeconds":3,"periodSeconds":10,"successThreshold":1,"failureThreshold":3},"readinessProbe":{"httpGet":{"path":"/health","port":8080,"scheme":"HTTP"},"initialDelaySeconds":3,"timeoutSeconds":3,"periodSeconds":10,"successThreshold":1,"failureThreshold":3},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","imagePullPolicy":"IfNotPresent"}],"restartPolicy":"Always","terminationGracePeriodSeconds":30,"dnsPolicy":"ClusterFirst","securityContext":{},"schedulerName":"default-scheduler"}}},"status":{"latestVersion":1,"observedGeneration":1,"replicas":0,"updatedReplicas":0,"availableReplicas":0,"unavailableReplicas":0,"details":{"message":"config change","causes":[{"type":"ConfigChange"}]},"conditions":[{"type":"Available","status":"False","lastUpdateTime":"2018-09-26T07:34:28Z","lastTransitionTime":"2018-09-26T07:34:28Z","message":"Deployment config does not have minimum availability."}]}}
+  creationTimestamp: null
+  generation: 1
+  labels:
+    app: dancer-mysql-example
+    openshift.io/deployment-config.name: dancer-mysql-example
+    template: dancer-mysql-example
+  name: dancer-mysql-example-1
+  ownerReferences:
+  - apiVersion: apps.openshift.io/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: DeploymentConfig
+    name: dancer-mysql-example
+    uid: 99dfb01f-c15e-11e8-9d6d-0253a4143ad0
+spec:
+  replicas: 1
+  selector:
+    deployment: dancer-mysql-example-1
+    deploymentconfig: dancer-mysql-example
+    name: dancer-mysql-example
+  template:
+    metadata:
+      annotations:
+        openshift.io/deployment-config.latest-version: "1"
+        openshift.io/deployment-config.name: dancer-mysql-example
+        openshift.io/deployment.name: dancer-mysql-example-1
+      creationTimestamp: null
+      labels:
+        deployment: dancer-mysql-example-1
+        deploymentconfig: dancer-mysql-example
+        name: dancer-mysql-example
+    spec:
+      containers:
+      - env:
+        - name: DATABASE_SERVICE_NAME
+          value: database
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              key: database-user
+              name: dancer-mysql-example
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: database-password
+              name: dancer-mysql-example
+        - name: MYSQL_DATABASE
+          value: sampledb
+        - name: SECRET_KEY_BASE
+          valueFrom:
+            secretKeyRef:
+              key: keybase
+              name: dancer-mysql-example
+        - name: PERL_APACHE2_RELOAD
+        image: docker-registry.default.svc:5000/demoproject/dancer-mysql-example@sha256:b4d41dff380ca5540930ae6bdd601c2c08257ce1ab33af5939912232d0ed8fa0
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 3
+        name: dancer-mysql-example
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 3
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 3
+        resources:
+          limits:
+            memory: 512Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  replicas: 0

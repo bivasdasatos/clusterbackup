@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: null
+  labels:
+    app: registry-console
+    createdBy: registry-console-template
+    name: registry-console
+  name: registry-console
+spec:
+  ports:
+  - name: registry-console
+    port: 9000
+    protocol: TCP
+    targetPort: 9090
+  selector:
+    name: registry-console
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

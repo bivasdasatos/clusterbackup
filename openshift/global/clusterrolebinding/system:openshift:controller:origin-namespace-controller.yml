@@ -1,0 +1,16 @@
+apiVersion: v1
+groupNames: null
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  name: system:openshift:controller:origin-namespace-controller
+roleRef:
+  name: system:openshift:controller:origin-namespace-controller
+subjects:
+- kind: ServiceAccount
+  name: origin-namespace-controller
+  namespace: openshift-infra
+userNames:
+- system:serviceaccount:openshift-infra:origin-namespace-controller

@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: ClusterRole
+metadata:
+  annotations:
+    authorization.openshift.io/system-only: "true"
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  name: system:registry
+rules:
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - limitranges
+  - resourcequotas
+  verbs:
+  - list
+- apiGroups:
+  - ""
+  - image.openshift.io
+  attributeRestrictions: null
+  resources:
+  - images
+  - imagestreamtags
+  verbs:
+  - delete
+  - get
+- apiGroups:
+  - ""
+  - image.openshift.io
+  attributeRestrictions: null
+  resources:
+  - imagestreamimages
+  - imagestreams/secrets
+  verbs:
+  - get
+- apiGroups:
+  - ""
+  - image.openshift.io
+  attributeRestrictions: null
+  resources:
+  - images
+  - imagestreams
+  verbs:
+  - get
+  - update
+- apiGroups:
+  - ""
+  - image.openshift.io
+  attributeRestrictions: null
+  resources:
+  - imagestreammappings
+  verbs:
+  - create

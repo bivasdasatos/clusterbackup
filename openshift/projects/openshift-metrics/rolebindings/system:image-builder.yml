@@ -1,0 +1,14 @@
+apiVersion: v1
+groupNames: null
+kind: RoleBinding
+metadata:
+  creationTimestamp: null
+  name: system:image-builder
+roleRef:
+  name: system:image-builder
+subjects:
+- kind: ServiceAccount
+  name: builder
+  namespace: openshift-metrics
+userNames:
+- system:serviceaccount:openshift-metrics:builder

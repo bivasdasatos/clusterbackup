@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: NetNamespace
+metadata:
+  creationTimestamp: null
+  name: logging
+netid: 6556825
+netname: logging

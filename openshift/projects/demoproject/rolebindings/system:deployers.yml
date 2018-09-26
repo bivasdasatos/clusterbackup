@@ -1,0 +1,14 @@
+apiVersion: v1
+groupNames: null
+kind: RoleBinding
+metadata:
+  creationTimestamp: null
+  name: system:deployers
+roleRef:
+  name: system:deployer
+subjects:
+- kind: ServiceAccount
+  name: deployer
+  namespace: demoproject
+userNames:
+- system:serviceaccount:demoproject:deployer

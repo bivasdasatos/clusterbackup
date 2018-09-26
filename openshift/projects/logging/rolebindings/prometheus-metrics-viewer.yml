@@ -1,0 +1,15 @@
+apiVersion: v1
+groupNames: null
+kind: RoleBinding
+metadata:
+  creationTimestamp: null
+  name: prometheus-metrics-viewer
+roleRef:
+  name: prometheus-metrics-viewer
+  namespace: logging
+subjects:
+- kind: ServiceAccount
+  name: prometheus
+  namespace: openshift-metrics
+userNames:
+- system:serviceaccount:openshift-metrics:prometheus

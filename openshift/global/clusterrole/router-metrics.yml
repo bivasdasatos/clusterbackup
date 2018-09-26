@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ClusterRole
+metadata:
+  creationTimestamp: null
+  name: router-metrics
+rules:
+- apiGroups:
+  - route.openshift.io
+  attributeRestrictions: null
+  resources:
+  - routers/metrics
+  verbs:
+  - get

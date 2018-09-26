@@ -1,0 +1,64 @@
+apiVersion: v1
+kind: ImageStream
+metadata:
+  annotations:
+    openshift.io/display-name: MariaDB
+    openshift.io/image.dockerRepositoryCheck: 2018-09-21T12:04:22Z
+  creationTimestamp: null
+  generation: 2
+  name: mariadb
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+  - annotations:
+      description: Provides a MariaDB 10.1 database on RHEL 7. For more information
+        about using this database image, including OpenShift considerations, see https://github.com/sclorg/mariadb-container/tree/master/10.1/README.md.
+      iconClass: icon-mariadb
+      openshift.io/display-name: MariaDB 10.1
+      openshift.io/provider-display-name: Red Hat, Inc.
+      tags: database,mariadb
+      version: "10.1"
+    from:
+      kind: DockerImage
+      name: docker-registry.default.svc:5000/openshift/mariadb:10.1
+    generation: 2
+    importPolicy: {}
+    name: "10.1"
+    referencePolicy:
+      type: Source
+  - annotations:
+      description: Provides a MariaDB 10.2 database on RHEL 7. For more information
+        about using this database image, including OpenShift considerations, see https://github.com/sclorg/mariadb-container/tree/master/10.2/README.md.
+      iconClass: icon-mariadb
+      openshift.io/display-name: MariaDB 10.2
+      openshift.io/provider-display-name: Red Hat, Inc.
+      tags: database,mariadb
+      version: "10.2"
+    from:
+      kind: DockerImage
+      name: docker-registry.default.svc:5000/openshift/mariadb:10.2
+    generation: 2
+    importPolicy: {}
+    name: "10.2"
+    referencePolicy:
+      type: Source
+  - annotations:
+      description: |-
+        Provides a MariaDB database on RHEL 7. For more information about using this database image, including OpenShift considerations, see https://github.com/sclorg/mariadb-container/tree/master/10.2/README.md.
+
+        WARNING: By selecting this tag, your application will automatically update to use the latest version of MariaDB available on OpenShift, including major versions updates.
+      iconClass: icon-mariadb
+      openshift.io/display-name: MariaDB (Latest)
+      openshift.io/provider-display-name: Red Hat, Inc.
+      tags: database,mariadb
+    from:
+      kind: DockerImage
+      name: docker-registry.default.svc:5000/openshift/mariadb:latest
+    generation: 1
+    importPolicy: {}
+    name: latest
+    referencePolicy:
+      type: Source
+status:
+  dockerImageRepository: ""

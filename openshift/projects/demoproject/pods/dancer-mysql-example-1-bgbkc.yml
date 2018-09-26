@@ -1,0 +1,116 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    openshift.io/deployment-config.latest-version: "1"
+    openshift.io/deployment-config.name: dancer-mysql-example
+    openshift.io/deployment.name: dancer-mysql-example-1
+    openshift.io/scc: restricted
+  creationTimestamp: null
+  generateName: dancer-mysql-example-1-
+  labels:
+    deployment: dancer-mysql-example-1
+    deploymentconfig: dancer-mysql-example
+    name: dancer-mysql-example
+  ownerReferences:
+  - apiVersion: v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicationController
+    name: dancer-mysql-example-1
+    uid: f07aa4f2-c15e-11e8-9d6d-0253a4143ad0
+spec:
+  containers:
+  - env:
+    - name: DATABASE_SERVICE_NAME
+      value: database
+    - name: MYSQL_USER
+      valueFrom:
+        secretKeyRef:
+          key: database-user
+          name: dancer-mysql-example
+    - name: MYSQL_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: database-password
+          name: dancer-mysql-example
+    - name: MYSQL_DATABASE
+      value: sampledb
+    - name: SECRET_KEY_BASE
+      valueFrom:
+        secretKeyRef:
+          key: keybase
+          name: dancer-mysql-example
+    - name: PERL_APACHE2_RELOAD
+    image: docker-registry.default.svc:5000/demoproject/dancer-mysql-example@sha256:b4d41dff380ca5540930ae6bdd601c2c08257ce1ab33af5939912232d0ed8fa0
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /health
+        port: 8080
+        scheme: HTTP
+      initialDelaySeconds: 30
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 3
+    name: dancer-mysql-example
+    ports:
+    - containerPort: 8080
+      protocol: TCP
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /health
+        port: 8080
+        scheme: HTTP
+      initialDelaySeconds: 3
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 3
+    resources:
+      limits:
+        memory: 512Mi
+      requests:
+        memory: 512Mi
+    securityContext:
+      capabilities:
+        drop:
+        - KILL
+        - MKNOD
+        - SETGID
+        - SETUID
+      runAsUser: 1000100000
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-rfqpj
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  imagePullSecrets:
+  - name: default-dockercfg-4gnpb
+  nodeName: ip-172-31-73-81.eu-central-1.compute.internal
+  nodeSelector:
+    node-role.kubernetes.io/compute: "true"
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext:
+    fsGroup: 1000100000
+    seLinuxOptions:
+      level: s0:c10,c5
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoSchedule
+    key: node.kubernetes.io/memory-pressure
+    operator: Exists
+  volumes:
+  - name: default-token-rfqpj
+    secret:
+      defaultMode: 420
+      secretName: default-token-rfqpj
+status:
+  phase: Pending
+  qosClass: Burstable

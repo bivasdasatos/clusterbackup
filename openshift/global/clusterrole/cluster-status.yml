@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: ClusterRole
+metadata:
+  annotations:
+    authorization.openshift.io/system-only: "true"
+    openshift.io/description: A user that can get basic cluster status information.
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  name: cluster-status
+rules:
+- apiGroups: null
+  attributeRestrictions: null
+  nonResourceURLs:
+  - /healthz
+  - /healthz/*
+  resources: []
+  verbs:
+  - get
+- apiGroups: null
+  attributeRestrictions: null
+  nonResourceURLs:
+  - /
+  - /.well-known
+  - /.well-known/*
+  - /api
+  - /api/*
+  - /apis
+  - /apis/*
+  - /oapi
+  - /oapi/*
+  - /osapi
+  - /osapi/
+  - /swagger-2.0.0.pb-v1
+  - /swagger.json
+  - /swaggerapi
+  - /swaggerapi/*
+  - /version
+  - /version/*
+  resources: []
+  verbs:
+  - get

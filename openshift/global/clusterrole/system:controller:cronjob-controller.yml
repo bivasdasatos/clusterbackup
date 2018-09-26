@@ -1,0 +1,65 @@
+apiVersion: v1
+kind: ClusterRole
+metadata:
+  annotations:
+    authorization.openshift.io/system-only: "true"
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  labels:
+    kubernetes.io/bootstrapping: rbac-defaults
+  name: system:controller:cronjob-controller
+rules:
+- apiGroups:
+  - batch
+  attributeRestrictions: null
+  resources:
+  - cronjobs
+  verbs:
+  - get
+  - list
+  - update
+  - watch
+- apiGroups:
+  - batch
+  attributeRestrictions: null
+  resources:
+  - jobs
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - batch
+  attributeRestrictions: null
+  resources:
+  - cronjobs/status
+  verbs:
+  - update
+- apiGroups:
+  - batch
+  attributeRestrictions: null
+  resources:
+  - cronjobs/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - pods
+  verbs:
+  - delete
+  - list
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - events
+  verbs:
+  - create
+  - patch
+  - update

@@ -1,0 +1,10 @@
+apiVersion: v1
+host: ip-172-31-25-38.eu-central-1.compute.internal
+hostIP: 172.31.25.38
+kind: HostSubnet
+metadata:
+  annotations:
+    pod.network.openshift.io/node-uid: b16a6e16-bd97-11e8-89cd-0253a4143ad0
+  creationTimestamp: null
+  name: ip-172-31-25-38.eu-central-1.compute.internal
+subnet: 10.128.0.0/23

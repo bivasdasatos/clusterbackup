@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: ClusterRole
+metadata:
+  annotations:
+    authorization.openshift.io/system-only: "true"
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  name: system:openshift:controller:deploymentconfig-controller
+rules:
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - replicationcontrollers
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - ""
+  - apps.openshift.io
+  attributeRestrictions: null
+  resources:
+  - deploymentconfigs/status
+  verbs:
+  - update
+- apiGroups:
+  - ""
+  - apps.openshift.io
+  attributeRestrictions: null
+  resources:
+  - deploymentconfigs/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - ""
+  - apps.openshift.io
+  attributeRestrictions: null
+  resources:
+  - deploymentconfigs
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - events
+  verbs:
+  - create
+  - patch
+  - update

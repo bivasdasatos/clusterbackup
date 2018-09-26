@@ -1,0 +1,4 @@
+V	200920122237Z		02	unknown	/O=Logging/OU=OpenShift/CN=system.logging.fluentd
+V	200920122239Z		03	unknown	/O=Logging/OU=OpenShift/CN=system.logging.kibana
+V	200920122241Z		04	unknown	/O=Logging/OU=OpenShift/CN=system.logging.curator
+V	200920122243Z		05	unknown	/O=Logging/OU=OpenShift/CN=system.admin

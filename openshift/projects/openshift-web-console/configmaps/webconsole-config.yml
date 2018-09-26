@@ -1,0 +1,31 @@
+apiVersion: v1
+data:
+  webconsole-config.yaml: |
+    apiVersion: webconsole.config.openshift.io/v1
+    clusterInfo:
+      consolePublicURL: https://backupmaster008.amosdemo.io:8443/console/
+      loggingPublicURL: https://kibana.apps008.amosdemo.io
+      logoutPublicURL: https://backupmaster008.amosdemo.io:8443/login
+      masterPublicURL: https://backupmaster008.amosdemo.io:8443
+      metricsPublicURL: https://hawkular-metrics.apps008.amosdemo.io/hawkular/metrics
+    extensions:
+      properties: {}
+      scriptURLs: []
+      stylesheetURLs: []
+    features:
+      clusterResourceOverridesEnabled: false
+      inactivityTimeoutMinutes: 0
+    kind: WebConsoleConfiguration
+    servingInfo:
+      bindAddress: 0.0.0.0:8443
+      bindNetwork: tcp4
+      certFile: /var/serving-cert/tls.crt
+      clientCA: ''
+      keyFile: /var/serving-cert/tls.key
+      maxRequestsInFlight: 0
+      namedCertificates: null
+      requestTimeoutSeconds: 0
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: webconsole-config

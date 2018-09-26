@@ -1,0 +1,16 @@
+apiVersion: v1
+groupNames: null
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    openshift.io/reconcile-protect: "false"
+  creationTimestamp: null
+  name: system:openshift:controller:image-import-controller
+roleRef:
+  name: system:openshift:controller:image-import-controller
+subjects:
+- kind: ServiceAccount
+  name: image-import-controller
+  namespace: openshift-infra
+userNames:
+- system:serviceaccount:openshift-infra:image-import-controller

@@ -1,0 +1,8 @@
+apiVersion: v1
+groups: null
+identities:
+- Other Members:admin
+kind: User
+metadata:
+  creationTimestamp: null
+  name: admin

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: NetNamespace
+metadata:
+  creationTimestamp: null
+  name: openshift
+netid: 13590093
+netname: openshift
